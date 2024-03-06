@@ -1,13 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
-import { AxiosResponse } from 'axios';
-import { lastValueFrom, map } from 'rxjs';
+import { firstValueFrom, map } from 'rxjs';
 // import { OrderDto } from './order.dto';
 @Injectable()
 export class AppService {
   constructor(private readonly httpService: HttpService) {}
 
-  async getOrderDetailsBack(order: number): Promise<AxiosResponse> {
+  async getOrderDetailsBack(order: number) {
     // const headersRequest = {
     //   consumer_key: 'ck_15e8dbc0b41de14b24f01293e8dd2137ff08aea2',
     //   consumer_secret: 'cs_cdc6d1a737f48c7ac2f038670cfd3a4255cd274a',
@@ -32,7 +31,7 @@ export class AppService {
 
     // Axios to get order details
 
-    const responseData = await lastValueFrom(
+    const responseData = await firstValueFrom(
       this.httpService
         .get(`https://socialviralclicks.com/wp-json/wc/v3/orders/${order}`, {
           headers: headersRequest,
