@@ -11,8 +11,8 @@ export class AppController {
   }
 
   @Post('/order')
-  getNewOrder(@Body() order: number): string {
-    return this.appService.getOrderDetails(order);
+  async getNewOrder(@Body() order: number) {
+    return await this.appService.getOrderDetails(order);
     // return console.log(orderDto);
   }
 }

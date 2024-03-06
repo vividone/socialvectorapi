@@ -2,6 +2,7 @@ import {
   IsDateString,
   IsNotEmpty,
   IsNumber,
+  IsObject,
   IsOptional,
   IsString,
 } from 'class-validator';
@@ -38,4 +39,7 @@ export class OrderDto {
   @IsNotEmpty()
   @IsString()
   service_url: string;
+
+  @IsObject()
+  meta_data: any;
 }
