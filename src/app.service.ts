@@ -7,14 +7,14 @@ export class AppService {
   constructor(private readonly httpService: HttpService) {}
 
   async getOrderDetails(order: number): Promise<AxiosResponse> {
-    const headersRequest = {
-      consumer_key: 'ck_15e8dbc0b41de14b24f01293e8dd2137ff08aea2',
-      consumer_secret: 'cs_cdc6d1a737f48c7ac2f038670cfd3a4255cd274a',
-    };
+    // const headersRequest = {
+    //   consumer_key: 'ck_15e8dbc0b41de14b24f01293e8dd2137ff08aea2',
+    //   consumer_secret: 'cs_cdc6d1a737f48c7ac2f038670cfd3a4255cd274a',
+    // };
     return this.httpService.axiosRef
-      .get(`https://socialviralclicks.com/wp-json/wc/v3/orders/${order}`, {
-        headers: headersRequest,
-      })
+      .get(
+        `https://socialviralclicks.com/wp-json/wc/v3/orders/${order}&consumer_key=ck_15e8dbc0b41de14b24f01293e8dd2137ff08aea2&consumer_secret=cs_cdc6d1a737f48c7ac2f038670cfd3a4255cd274a`,
+      )
       .then((res) => res.data)
       .catch((err) => {
         throw new Error(
