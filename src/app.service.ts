@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
+import { firstValueFrom } from 'rxjs';
 // import { OrderDto } from './order.dto';
 @Injectable()
 export class AppService {
@@ -12,15 +13,21 @@ export class AppService {
     };
 
     // Axios to get order details
-    const orderDetails = await this.httpService.get(
-      `https://socialviralclicks.com/wp-json/wc/v3/orders/${order}`,
-      { headers: headersRequest },
+    const response = await firstValueFrom(
+      this.httpService.get(
+        `https://socialviralclicks.com/wp-json/wc/v3/orders/${order}`,
+        {
+          headers: headersRequest,
+        },
+      ),
     );
     // Check if order is foreign
     // if (orderDetails.meta_data[14].value === 'foreign') {
     //   // Process Order on JAP
     // }
-    console.log(orderDetails);
+    console.log(`response`, response);
+    console.log(`Response Data`, response.data);
+
     // return `The order number is ${order}`;
   }
 }
