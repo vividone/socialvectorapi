@@ -10,7 +10,7 @@ export class AppController {
     return this.appService.getHello();
   }
 
-  @Post()
+  @Post('/order')
   getNewOrder(order: any): void {
     console.log(order);
     //   if (order.category === 'foreign') {
