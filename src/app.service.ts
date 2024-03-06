@@ -1,14 +1,9 @@
-import { AxiosHeaders } from './../node_modules/axios/index.d';
 import { Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
 // import { OrderDto } from './order.dto';
 @Injectable()
 export class AppService {
   constructor(private readonly httpService: HttpService) {}
-
-  getHello(): string {
-    return 'Hello World!';
-  }
 
   async getOrderDetails(order: number) {
     const headersRequest = {
