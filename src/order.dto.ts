@@ -1,4 +1,5 @@
 import {
+  IsArray,
   IsDateString,
   IsNotEmpty,
   IsNumber,
@@ -27,4 +28,8 @@ export class OrderDto {
   @IsNotEmpty()
   @IsObject()
   line_items: object;
+
+  @IsNotEmpty()
+  @IsArray()
+  meta_data: any;
 }

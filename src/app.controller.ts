@@ -13,11 +13,16 @@ export class AppController {
 
   @Post('/order')
   getNewOrder(@Body() orderDto: OrderDto): void {
-    return console.log(orderDto);
-    //   if (order.category === 'foreign') {
-    //     console.log(order);
-    //   } else {
-    //     process.exit();
-    //   }
+    // return console.log(orderDto);
+    const metas = orderDto.meta_data;
+
+    const product_cat = metas[14].value;
+    // const obj = metas.((k) => k.key === 'product_cat');
+    // console.log(obj);
+    if (product_cat === 'foreign') {
+      console.log(orderDto);
+    } else {
+      process.exit();
+    }
   }
 }
