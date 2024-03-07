@@ -12,10 +12,10 @@ export class AppController {
     // return console.log(orderDto);
   }
 
-  @Post('/v2/order')
-  async getNewOrderBack(@Body() order: any) {
-    const { id } = order;
-    return await this.appService.getOrderDetailsBack(id);
-    // return console.log(orderDto);
-  }
+  // @Post('/v2/order')
+  // async getNewOrderBack(@Body() order: any) {
+  //   const { id } = order;
+  //   return await this.appService.getOrderDetailsBack(id);
+  //   // return console.log(orderDto);
+  // }
 }
