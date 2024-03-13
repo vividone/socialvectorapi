@@ -8,7 +8,7 @@ export class AppController {
   @Post('/order')
   async getNewOrder(@Body() order: any) {
     const { id } = order;
-    return await this.appService.getOrderDetails(id);
+    return await this.appService.processOrder(id);
     // return console.log(orderDto);
   }
 

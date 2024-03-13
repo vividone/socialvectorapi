@@ -8,70 +8,99 @@ import WooCommerceRestApi from '@woocommerce/woocommerce-rest-api';
 export class AppService {
   constructor(private readonly httpService: HttpService) {}
 
-  async getOrderDetails(order: number) {
+  async processOrder(id: number) {
     const api = new WooCommerceRestApi({
-      url: 'https://socialviralclicks.com',
-      consumerKey: 'ck_15e8dbc0b41de14b24f01293e8dd2137ff08aea2',
-      consumerSecret: 'cs_cdc6d1a737f48c7ac2f038670cfd3a4255cd274a',
+      url: process.env.woo_url,
+      consumerKey: process.env.consumerKey,
+      consumerSecret: process.env.consumerSecret,
       version: 'wc/v3',
     });
 
-    return api.get('orders/', order).then((response) => {
-      console.log(response.data);
+    const fetchData = `orders/${id}`;
+    const orderDetails: any = await api.get(fetchData).then((response) => {
+      return response.data;
     });
 
-    // return await firstValueFrom(
-    //   this.httpService.get(api).pipe(
-    //     map((res) => {
-    //       return res.data;
-    //     }),
-    //   ),
-    // );
-    // const headersRequest = {
-    //   consumerKey: 'ck_15e8dbc0b41de14b24f01293e8dd2137ff08aea2',
-    //   consumerSecret: 'cs_cdc6d1a737f48c7ac2f038670cfd3a4255cd274a',
-    //   queryStringAuth: true,
-    // };
+    const foreignOrder = orderDetails.meta_data[14].value;
+    const orderQty = orderDetails.line_items[0].quantity;
+    const sku = orderDetails.line_items[0].sku;
+    const link =
+      orderDetails.line_items[0].meta_data[5].value[0].tmcp_post_fields
+        .tmcp_textfield_0;
+    const username =
+      orderDetails.line_items[0].meta_data[5].value[0].tmcp_post_fields
+        .tmcp_textfield_0;
+    let quantity: number;
 
-    // Axios to get order details
+    if (
+      sku === 2918 ||
+      2929 ||
+      5026 ||
+      2108 ||
+      2133 ||
+      2934 ||
+      322 ||
+      2127 ||
+      5025 ||
+      2919 ||
+      5024 ||
+      6835 ||
+      2135 ||
+      1845 ||
+      1823 ||
+      1782 ||
+      1805 ||
+      1813
+    ) {
+      quantity = orderQty * 1000;
+    }
 
-    // const responseData = await firstValueFrom(
-    //   this.httpService
-    //     .get(`https://socialviralclicks.com/wp-json/wc/v3/orders/${order}`, {
-    //       headers: headersRequest,
-    //     })
-    //     .pipe(
-    //       map((res) => {
-    //         return res.data;
-    //       }),
-    //     ),
-    // );
-    // return responseData;
+    if (foreignOrder === 'foreign') {
+      const order = {
+        key: process.env.apikey,
+        action: 'add',
+        link: link,
+        username: username,
+        service: sku,
+        quantity: quantity,
+      };
+      const postOrder = await this.httpService.axiosRef
+        .post(process.env.jap_url, order)
+        .then((res) => res.data)
+        .catch((err) => {
+          throw new Error(
+            err?.message + ': ' + JSON.stringify(err?.response?.data),
+          );
+        });
 
-    // Check if order is foreign
-    // if (orderDetails.meta_data[14].value === 'foreign') {
-    //   // Process Order on JAP
+      return postOrder;
+    }
+    //   // return postOrder;
+    else {
+      console.log('Order is not foreign');
+    }
+
+    // switch (String(orderDetails.line_items[0].parent_name)) {
+    //   case 'Instagram Thread Likes':
+    //     console.log('Instagram Thread Likes');
+    //   // const package_order = {
+    //   //   key: jap_apikey,
+    //   //   action: 'add',
+    //   //   service: '',
+    //   //   link: '',
+    //   // };
+    //   case 'Instagram Thread Followers':
+    //     console.log('Instagram Thread Likes');
+
+    //   case 'Instagram Threads Shares/Comments':
+    //     console.log('Instagram Threads Shares/Comments');
+
+    //   default:
+    //     console.log('This is default');
     // }
-    // console.log(`response`, response);
-    // console.log(`Response Data`, response.data);
 
-    // return `The order number is ${order}`;
+    // Get order details from JPA
+
+    // // console.log(orderDetails);
   }
-
-  // async getOrderDetailsBack(order: number) {
-  //   // const headersRequest = {
-  //   //   consumer_key: 'ck_15e8dbc0b41de14b24f01293e8dd2137ff08aea2',
-  //   //   consumer_secret: 'cs_cdc6d1a737f48c7ac2f038670cfd3a4255cd274a',
-  //   // };
-  //   return await this.httpService.axiosRef
-  //     .get(
-  //       `https://socialviralclicks.com/wp-json/wc/v3/orders/${order}&consumer_key=ck_15e8dbc0b41de14b24f01293e8dd2137ff08aea2&consumer_secret=cs_cdc6d1a737f48c7ac2f038670cfd3a4255cd274a`,
-  //     )
-  //     .then((res) => res.data)
-  //     .catch((err) => {
-  //       throw new Error(
-  //         err?.message + ': ' + JSON.stringify(err?.response?.data),
-  //       );
-  //     });
-  // }
 }

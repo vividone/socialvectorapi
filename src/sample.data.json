@@ -1,4 +1,4 @@
- {
+  {
     "id": 1258,
     "parent_id": 0,
     "status": "processing",
@@ -425,3 +425,66 @@
         ]
     }
 }
+
+
+//   meta_data: [
+//     { id: 12144, key: 'is_vat_exempt', value: 'no' },
+//     { id: 12145, key: 'wmc_order_info', value: [Object] },
+//     {
+//       id: 12146,
+//       key: '_wc_order_attribution_source_type',
+//       value: 'referral'
+//     },
+//     {
+//       id: 12147,
+//       key: '_wc_order_attribution_referrer',
+//       value: 'https://checkout.paystack.com/8z3q6narmjoy31c'
+//     },
+//     {
+//       id: 12148,
+//       key: '_wc_order_attribution_utm_source',
+//       value: 'checkout.paystack.com'
+//     },
+//     {
+//       id: 12149,
+//       key: '_wc_order_attribution_utm_medium',
+//       value: 'referral'
+//     },
+//     {
+//       id: 12150,
+//       key: '_wc_order_attribution_utm_content',
+//       value: '/8z3q6narmjoy31c'
+//     },
+//     {
+//       id: 12151,
+//       key: '_wc_order_attribution_session_entry',
+//       value: 'https://socialviralclicks.com/summary/order-received/1259/?key=wc_order_Hf0VBacDJgfzs'
+//     },
+//     {
+//       id: 12152,
+//       key: '_wc_order_attribution_session_start_time',
+//       value: '2024-03-07 19:22:43'
+//     },
+//     {
+//       id: 12153,
+//       key: '_wc_order_attribution_session_pages',
+//       value: '9'
+//     },
+//     {
+//       id: 12154,
+//       key: '_wc_order_attribution_session_count',
+//       value: '10'
+//     },
+//     {
+//       id: 12155,
+//       key: '_wc_order_attribution_user_agent',
+//       value: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36'
+//     },
+//     {
+//       id: 12156,
+//       key: '_wc_order_attribution_device_type',
+//       value: 'Desktop'
+//     },
+//     { id: 12157, key: '_paystack_txn_ref', value: '1298_1710259784' },
+//     { id: 12158, key: '_wc_acof_2', value: 'foreign' }
+//   ],
