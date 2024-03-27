@@ -50,9 +50,13 @@ export class AppService {
       1823 ||
       1782 ||
       1805 ||
-      1813
+      1813 ||
+      8527 ||
+      6859
     ) {
       quantity = orderQty * 1000;
+    } else if (sku === 6004 || 7088) {
+      quantity = orderQty * 1;
     }
 
     if (foreignOrder === 'foreign') {
